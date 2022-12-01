@@ -69,9 +69,120 @@
                     }
                 }
             }
+        },
+        "/auth/sign-up": {
+            "post": {
+                "tags": ["Authorization"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SignUp"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Registration",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SignUp"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "429": {
+                        "description": "Too Many Requests."
+                    }
+                }
+            }
+        },
+        "/auth/sign-in": {
+            "post": {
+                "tags": ["Authorization"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SignIn"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sign-In",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SignIn"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "429": {
+                        "description": "Too Many Requests."
+                    }
+                }
+            }
+        },
+        "/auth/me": {
+            "get": {
+                "tags": ["Authorization"],
+                "responses": {
+                    "200": {
+                        "description": "Authorization",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthMe"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "429": {
+                        "description": "Too Many Requests."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Bearer Authorization",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
         "schemas": {
             "Message": {
                 "type": "object",
@@ -100,6 +211,70 @@
                         "type": "boolean",
                         "default": "true",
                         "readOnly": true
+                    }
+                }
+            },
+            "SignUp": {
+                "type": "object",
+                "properties": {
+                    "login": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "password": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "message":{
+                        "type": "string",
+                        "readOnly":true
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "Date",
+                        "readOnly": true
+                    }
+                }
+            },
+            "SignIn": {
+                "type": "object",
+                "properties": {
+                    "login": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "password": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "message":{
+                        "type": "string",
+                        "readOnly":true
+                    },
+                    "JWT": {
+                        "type": "string",
+                        "readOnly":true
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "Date",
+                        "readOnly": true
+                    }
+                }
+            },
+            "AuthMe": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "type": "object"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "Date"
                     }
                 }
             }

@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 import expressWs from 'express-ws';
 import setupSwaggerUI from './http/swaggerDocumentation';
 import cors from 'cors';
@@ -29,6 +29,7 @@ app.ws('/api', wsHandler);
 
 const routes = express.Router();
 
+require('./http/users').default(routes);
 require('./http/example').default(routes);
 
 app.use('/api', routes);

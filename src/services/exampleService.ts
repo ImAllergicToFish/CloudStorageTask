@@ -16,5 +16,4 @@ export default class ExampleService {
             isEcho: true
         };
     }
-    
 }   
