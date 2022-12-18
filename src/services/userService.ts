@@ -1,7 +1,6 @@
-import User from "../api/http/users/schemas/User";
+import User from "../database/schemas/User";
 import bcrypt from 'bcryptjs';
 import { Token } from "../api/http/users/jwtToken";
-import { getConfig } from "../config";
 import { HttpError } from "../utils/httpError";
 import { SignInMessage, SignUpMessage } from "../ts/types";
 
@@ -12,14 +11,14 @@ export default class UserService {
             throw new HttpError(400, 'Пользователь с таким логином уже существует');
         }
         const hashPassword = bcrypt.hashSync(password, 8);
-        const user = new User({login, email, password: hashPassword});
-        await user.save();
+        await User.create({login, email, password: hashPassword});
         return {
             message: `create user: ${login}`,
             date: new Date().toISOString()
         }
     }
 
+    // FIXME добавить патерн провайдер
     static async login(login: string, password: string): Promise<SignInMessage> {
         const candidate = await User.findOne({ login });
         if (!candidate) {
