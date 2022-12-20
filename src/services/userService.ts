@@ -3,10 +3,11 @@ import bcrypt from 'bcryptjs';
 import { Token } from "../api/http/users/jwtToken";
 import { HttpError } from "../utils/httpError";
 import { SignInMessage, SignUpMessage } from "../ts/types";
+import { UserProvider } from "../provider/UserProvider";
 
 export default class UserService {
     static async create(login: string, email: string, password: string): Promise<SignUpMessage> {
-        const candidate = await User.findOne({ login });
+        const candidate = await UserProvider.findOne({ login });
         if (candidate) {
             throw new HttpError(400, 'Пользователь с таким логином уже существует');
         }
@@ -18,9 +19,9 @@ export default class UserService {
         }
     }
 
-    // FIXME добавить патерн провайдер
+    // FIXME добавить провайдер
     static async login(login: string, password: string): Promise<SignInMessage> {
-        const candidate = await User.findOne({ login });
+        const candidate = await UserProvider.findOne({ login });
         if (!candidate) {
             throw new HttpError(400, 'Пользователь с таким логином не найден');
         } 
@@ -37,12 +38,6 @@ export default class UserService {
             date: new Date().toISOString()
         }
     }   
-
-    static async getUsers() {
-        const users = await User.find();
-        return users;
-    }
-
 
     static async getById(id: Object) {
         
