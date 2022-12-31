@@ -12,7 +12,7 @@ export default class UserService {
             throw new HttpError(400, 'Пользователь с таким логином уже существует');
         }
         const hashPassword = bcrypt.hashSync(password, 8);
-        await User.create({login, email, password: hashPassword});
+        const user = await UserProvider.create({login, email, password: hashPassword});
         return {
             message: `create user: ${login}`,
             date: new Date().toISOString()
@@ -44,7 +44,7 @@ export default class UserService {
     }
  
     static async changePass() {
-
+        
     }
 
     static async deleteUser() {

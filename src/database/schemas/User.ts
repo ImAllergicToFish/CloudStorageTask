@@ -18,7 +18,7 @@ const User = new Schema({
     number: {
         type: Number
     },
-    role: [{type: String}]
+    role: [{type: String, ref: 'Role'}]
 })
 
 export default model('User', User);
