@@ -1,4 +1,3 @@
-import { Model, Query, Schema } from "mongoose";
 import User from "../database/schemas/User";
 
 type FindType = {

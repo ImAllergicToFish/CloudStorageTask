@@ -1,6 +1,7 @@
 import { Schema, model}  from 'mongoose';
+import { UserInterface } from '../../ts/interfaces';
 
-const User = new Schema({
+const User = new Schema<UserInterface>({
     login: {
         type: String, 
         unique: true, 
@@ -18,7 +19,7 @@ const User = new Schema({
     number: {
         type: Number
     },
-    role: [{type: String, ref: 'Role'}]
+    role: [{type: String, ref: 'Role'}],
 })
 
 export default model('User', User);
