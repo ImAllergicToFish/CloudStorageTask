@@ -4,7 +4,7 @@ export interface RoleInterface {
     role: string;
 }
 
-export interface Fileinterface {
+export interface FileInterface {
     name: string;
     createBy: string;
     updateBy: string
@@ -20,5 +20,5 @@ export interface UserInterface {
     password: string;
     number: number;
     role: Types.DocumentArray<RoleInterface>;
-    files: Types.DocumentArray<Fileinterface>;
+    files: Types.DocumentArray<FileInterface>;
 }

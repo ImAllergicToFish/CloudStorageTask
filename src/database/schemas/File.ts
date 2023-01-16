@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
-import { Fileinterface } from "../../ts/interfaces";
+import { FileInterface } from "../../ts/interfaces";
 
-const File = new Schema<Fileinterface>({
+const File = new Schema<FileInterface>({
     name: {
         type: String,
         unique: true,

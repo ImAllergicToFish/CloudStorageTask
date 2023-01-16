@@ -1,4 +1,3 @@
-import User from "../database/schemas/User";
 import bcrypt from 'bcryptjs';
 import { Token } from "../api/http/users/jwtToken";
 import { HttpError } from "../utils/httpError";
@@ -37,17 +36,21 @@ export default class UserService {
             jwt: jwtToken,
             date: new Date().toISOString()
         }
-    }   
-
-    static async getById(id: Object) {
-        
-    }
- 
-    static async changePass() {
-        
     }
 
-    static async deleteUser() {
+    static async downloadFile() {
 
+    }
+
+    static async uploadFile() {
+
+    }
+
+    static async getFileById() {
+
+    }
+
+    static async getFiles() {
+        
     }
 }

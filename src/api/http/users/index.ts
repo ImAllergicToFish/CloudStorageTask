@@ -17,4 +17,16 @@ export default (app: express.Application) => {
         '/auth/sign-in',
         require('./singIn').default
     );
+    app.post(
+        '/me/download',
+        require('./downloadFile').default
+    )
+    app.get(
+        '/me/files',
+        require('./getFiles').default
+    )
+    app.get(
+        '/me/files/:id',
+        require('./getFileById').default
+    )
 }
