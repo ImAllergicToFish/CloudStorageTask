@@ -1,4 +1,4 @@
-import { Schema, model}  from 'mongoose';
+import { Schema, model, ObjectId}  from 'mongoose';
 import { UserInterface } from '../../ts/interfaces';
 
 const User = new Schema<UserInterface>({
@@ -20,6 +20,7 @@ const User = new Schema<UserInterface>({
         type: Number
     },
     role: [{type: String, ref: 'Role'}],
+    files: [{type: Object, ref: 'File'}]
 })
 
 export default model('User', User);

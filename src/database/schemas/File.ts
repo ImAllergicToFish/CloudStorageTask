@@ -7,29 +7,43 @@ const File = new Schema<FileInterface>({
         unique: true,
         require: true
     },
+    type: {
+        type: String,
+        require: true
+    },
+    path: {
+        type: String,
+        require: true,
+        default: ''
+    },
+    accessLink: {
+        type: String
+    },
     createBy: {
         type: String,
-        require: true
+        //require: true,
     },
     updateBy: {
-        type: String,
-        require: true
+        type: String
     },
     createDate: {
-        type: Date,
+        type: String,
         require: true
     },
     size: {
         type: Number,
-        require: true
+        require: true,
+        default: 0
     },
     downloadCount: {
         type: Number,
-        require: true
+        //require: true,
+        default: 0
     },
     viewsCount: {
         type: Number,
-        require: true
+        //require: true,
+        default: 0
     }
 })
 

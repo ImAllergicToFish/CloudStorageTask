@@ -6,12 +6,15 @@ export interface RoleInterface {
 
 export interface FileInterface {
     name: string;
-    createBy: string;
-    updateBy: string
-    createDate: Date;
+    type: string;
+    path: string;
+    accessLink?: string;
+    createBy?: string;
+    updateBy?: string
+    createDate: string;
     size: number;
-    downloadCount: number;
-    viewsCount: number;
+    downloadCount?: number;
+    viewsCount?: number;
 }
 
 export interface UserInterface {

@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
-import UserService from '../../../services/userService';
+import FileService from '../../../services/fileService';
+import ApiResponseHandler from '../apiResponseHandler';
 
-export default async () => {
+export default async (req: Request, res: Response, next: NextFunction) => {
     try {
         
     } catch (error) {
-        console.log(error);
+        await ApiResponseHandler.error(req, res, error);
     }
 }

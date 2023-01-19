@@ -11,65 +11,6 @@
         }
     ],
     "paths": {
-        "/example": {
-            "get": {
-                "tags": ["Example"],
-                "responses": {
-                    "200": {
-                        "description": "Return hello message",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Message" 
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "429": {
-                        "description": "Too Many Requests."
-                    }
-                }
-            }
-        },
-        "/example/echo": {
-            "post": {
-                "tags": ["Example"],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/EchoMessage"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EchoMessage"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "429": {
-                        "description": "Too Many Requests."
-                    }
-                }
-            }
-        },
         "/auth/sign-up": {
             "post": {
                 "tags": ["Authorization"],
@@ -184,36 +125,6 @@
             }
         },
         "schemas": {
-            "Message": {
-                "type": "object",
-                "properties": {
-                    "message": {
-                        "type": "string"
-                    },
-                    "date": {
-                        "type": "string",
-                        "format": "Date"
-                    }
-                }
-            },
-            "EchoMessage": {
-                "type": "object",
-                "properties": {
-                    "message": {
-                        "type": "string"
-                    },
-                    "date": {
-                        "type": "string",
-                        "format": "Date",
-                        "readOnly": true
-                    },
-                    "isEcho": {
-                        "type": "boolean",
-                        "default": "true",
-                        "readOnly": true
-                    }
-                }
-            },
             "SignUp": {
                 "type": "object",
                 "properties": {

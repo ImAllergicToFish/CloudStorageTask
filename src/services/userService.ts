@@ -37,20 +37,4 @@ export default class UserService {
             date: new Date().toISOString()
         }
     }
-
-    static async downloadFile() {
-
-    }
-
-    static async uploadFile() {
-
-    }
-
-    static async getFileById() {
-
-    }
-
-    static async getFiles() {
-        
-    }
 }

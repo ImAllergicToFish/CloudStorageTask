@@ -1,8 +1,6 @@
 import express from 'express';
 import { authMidlleware } from '../../../middlewares/authMidelleware';
 
-
-
 export default (app: express.Application) => {
     app.get(
         '/auth/me',
@@ -18,15 +16,15 @@ export default (app: express.Application) => {
         require('./singIn').default
     );
     app.post(
-        '/me/download',
-        require('./downloadFile').default
+        '/file/upload',
+        require('./uploadFile').default
     )
     app.get(
-        '/me/files',
+        '/get-files',
         require('./getFiles').default
     )
     app.get(
-        '/me/files/:id',
+        '/get-files/:id',
         require('./getFileById').default
     )
 }

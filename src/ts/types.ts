@@ -21,3 +21,8 @@ export type SignUpMessage = {
     message: string,
     date: string
 }
+
+export type UploadFileMessage = {
+    message: string,
+    date: string
+}

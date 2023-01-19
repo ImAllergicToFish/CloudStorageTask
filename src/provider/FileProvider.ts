@@ -1,15 +1,13 @@
 import File from "../database/schemas/File";
+import { FileInterface } from "../ts/interfaces";
 
 export class FileProvider {
-    static create = () => {
-
+    static create = async (fileData: FileInterface) => {
+       const file = await File.create(fileData);
+       return file;
     }
 
-    static upload= () => {
+    static download = () => {
 
-    }
-
-    static view= () => {
-        
     }
 }
