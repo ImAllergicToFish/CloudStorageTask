@@ -17,3 +17,4 @@ export async function authMidlleware(req: Request, res: Response, next: NextFunc
         await ApiResponseHandler.error(req, res, error);
     }
 }
+

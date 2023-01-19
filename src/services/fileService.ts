@@ -1,5 +1,6 @@
 import { FileProvider } from "../provider/FileProvider";
 import { UploadFileMessage } from "../ts/types";
+import { HttpError } from "../utils/httpError";
 
 export default class FileService {
     static async upload(name: string, mimetype: string, path: string, size: number): Promise<UploadFileMessage> {
@@ -13,14 +14,19 @@ export default class FileService {
     }
 
     static async download() {
-        
+
     }
 
-    static async getFileById() {
-
+    static async getFileByName(id: string) {
+        const file = await FileProvider.getById(id);
+        if(!file) {
+            throw new HttpError(400, 'Файл не найден');
+        }
+        return file;
     }
 
     static async getFiles() {
-        
+        const files = await FileProvider.getFiles();
+        return files;
     }
 }
