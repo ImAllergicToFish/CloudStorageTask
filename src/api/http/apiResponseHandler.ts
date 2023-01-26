@@ -32,7 +32,7 @@ export default class ApiResponseHandler {
 
     static async error(req: Request, res: Response, error: Error | unknown) {
         if (error instanceof Error) {
-            res.status(error.code).send(error.message);
+            res.status(error.code).send({message: error.message});
         } else {
             console.error(error);
             res.status(500).send(error);

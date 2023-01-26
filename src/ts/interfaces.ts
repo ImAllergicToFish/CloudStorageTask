@@ -1,3 +1,4 @@
+import { Request } from 'express'
 import {Types} from 'mongoose'
 
 //------------------------------------------------------------|
@@ -5,7 +6,7 @@ import {Types} from 'mongoose'
 //------------------------------------------------------------/
 
 export interface IUser{
-   
+        id: string,
         email: string,
         username: string,
         password: string,
@@ -15,6 +16,23 @@ export interface IUser{
     
 }
 
-export interface IJWTData{
+export interface IJWTData {
         
 }
+
+export interface FileInterface {
+        _id?: Types.ObjectId 
+        name: String
+        type: String
+        size: Number
+        date?: String
+        accessLink?: String
+        path: String | undefined
+        user: string | undefined
+        parentDirectory:Types.ObjectId | undefined
+        childs?: Types.ObjectId[]
+}
+
+// export interface RequestWithId extends Request {
+//        id: string
+// } 

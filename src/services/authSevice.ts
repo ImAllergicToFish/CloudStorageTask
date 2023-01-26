@@ -1,42 +1,35 @@
 import { SignInMessage, SignUpMessage} from "../ts/types";
-import { Request, Response , NextFunction} from 'express';
-import { userModel } from "../models/userModel";
-import { isPasswordValid } from "../middlewares/hashString";
+import { isPasswordValid } from "../utils/hashString";
 import { HttpError } from "../utils/httpError";
-import { generateJWT } from "../middlewares/JWT";
-import UserService from "./userService";
-import ApiResponseHandler from "../api/http/apiResponseHandler";
+import { generateJWT } from "../utils/JWT";
+import userProvider from "../providers/userProvider";
+
+
 
 export default class AuthService {
 
      static async signUp(_email:string, _username: string, _password: string) : Promise<SignUpMessage> {
-        try {
-            
-            if( await userModel.findOne({email: _email})){
-                throw new HttpError(
-                    400, 'User with this email already exists'
-                   );
-            } else if(await userModel.findOne({username: _username})){
-                throw new HttpError(
-                    400, 'User with this email already exists'
-                   );
+        
+
+            if(await userProvider.findUserByProperty('email', _email)){
+                throw new HttpError( 400, 'User with this email already exists' )
             }
-            UserService.createUser(_email, _username, _password)
-            
+            if(await userProvider.findUserByProperty('username',_username)){
+                throw new HttpError( 400, 'User with this username already exists' )
+            }
+            userProvider.createUser(_email, _username, _password)
             return {
                 isSignUp: true,
                 message: 'Registration complete!',
                 date: new Date().toISOString()
             };
 
-        } catch (e) {
-             throw e
-        }
+        
     }
     static async signIn(email:string, password: string) : Promise<SignInMessage> {
         
-        try {
-            const User = await UserService.findUserByEmail(email)
+ 
+            const User = await userProvider.findUserByProperty('email', email)
             if(!User){
                 throw new HttpError(400, 'User with this email not found')
             }
@@ -44,27 +37,22 @@ export default class AuthService {
                 throw new HttpError(400, 'Incorrect password')
             }
             return {
+                user: {
+                    id: User.id,
+                    username: User.username,
+                    email: User.email,
+                    diskSpace: User.diskSpace,
+                    usedSpace: User.usedSpace,
+                    files: User.files
+                },
                 isSignIn: true,
                 message: 'Authorization complete!',
                 JWT: generateJWT(User.id),
                 date: new Date().toISOString()
             }
             
-        } catch (error) {
-            throw error
-        }
+
     }
-    // static async AuthMe(req: Request, res: Response, next: NextFunction){
-    //     try {
-            
-    //          return res.status(200).send({
-    //             id: req.params.id,
-    //             date: new Date().toISOString()
-    //         })
-    //     } catch (error) {
-            
-    //        next(error)
-    //     }
-    // }
+
     
 }   

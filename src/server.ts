@@ -1,6 +1,5 @@
 require('dotenv').config();
-const mongoose = require('mongoose');
-import { startSession } from 'mongoose';
+import dbConnect from './dbconnect';
 import api from './api';
 import { getConfig } from './config';
 
@@ -10,11 +9,7 @@ const PORT = getConfig().PORT || 8080;
 
 async function Start() {
     try {
-        await mongoose.connect(getConfig().DATABASE_CONNECTION)
-        .then(()=>{
-            console.log('Successfully connected to database');
-            
-        })
+        await dbConnect()
         api.listen(PORT, () => {
             console.log(`Listening on port ${PORT}`);
         });
